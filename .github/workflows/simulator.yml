@@ -1,0 +1,35 @@
+name: Static analysis checks
+
+on:
+  push:
+
+jobs:
+  static-analysis:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "src/"
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build core
+        run: npx tsc --build ./tsconfig.json
+
+      - name: Upload core build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: core-build
+          path: |
+            src/dist/**
+            src/**/*.d.ts
+          if-no-files-found: error
