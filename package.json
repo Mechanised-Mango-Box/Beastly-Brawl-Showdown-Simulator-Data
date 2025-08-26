@@ -25,9 +25,6 @@
         "build": "tsc",
         "prepublishOnly": "npm run build"
     },
-    "devDependencies": {
-        "typescript": "^5.9.2"
-    },
     "dependencies": {
         "@beastly-brawl-showdown/sim-core": "^0.1.1"
     }
